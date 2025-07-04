@@ -10,7 +10,7 @@ source:
     sha256: 72f0bc6c42c19252be87e947d9dfe251c8d6c6943fd43e3d173ddc6b1afad693
 
 build:
-  number: 0
+  number: 1
   script: {{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
 
 requirements:
@@ -19,6 +19,7 @@ requirements:
     - {{ compiler("cxx") }}
     - {{ stdlib("c") }}
     - cmake
+    - cross-python_{{ target_platform }}  # [build_platform != target_platform]
     - make
     - pip                # [build_platform != target_platform]
     - python             # [build_platform != target_platform]
