@@ -1,5 +1,5 @@
 {% set name = "xatlas-python" %}
-{% set version = "0.0.10" %}
+{% set version = "0.0.11" %}
 
 package:
   name: {{ name|lower }}
@@ -7,10 +7,10 @@ package:
 
 source:
   - url: https://pypi.org/packages/source/{{ name[0] }}/xatlas/xatlas-{{ version }}.tar.gz
-    sha256: bc36b6c7db8fcf1f58f1b5badd8927fdf8eb2b2182e436f07831dc789c9fbf04
+    sha256: 72f0bc6c42c19252be87e947d9dfe251c8d6c6943fd43e3d173ddc6b1afad693
 
 build:
-  number: 1
+  number: 0
   script: {{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
 
 requirements:
