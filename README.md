@@ -9,6 +9,8 @@ Package license: MIT
 
 Summary: Python bindings for xatlas
 
+Development: https://github.com/mworchel/xatlas-python
+
 Current build status
 ====================
 
