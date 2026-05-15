@@ -1,0 +1,66 @@
+schema_version: 1
+
+context:
+  name: xatlas-python
+  source_name: xatlas
+  version: "0.0.11"
+
+package:
+  name: ${{ name|lower }}
+  version: ${{ version }}
+
+source:
+  url: https://pypi.org/packages/source/${{ source_name[0] }}/${{ source_name }}/${{ source_name }}-${{ version }}.tar.gz
+  sha256: 72f0bc6c42c19252be87e947d9dfe251c8d6c6943fd43e3d173ddc6b1afad693
+
+build:
+  number: 5
+  script: python -m pip install . -vv --no-deps --no-build-isolation
+
+requirements:
+  build:
+    - ${{ compiler("c") }}
+    - ${{ compiler("cxx") }}
+    - ${{ stdlib("c") }}
+    - cmake
+    - if: unix
+      then: make
+    - if: build_platform != target_platform
+      then:
+        - cross-python_${{ target_platform }}
+        - pip
+        - python
+        - scikit-build-core
+  host:
+    - pip
+    - python
+    - scikit-build-core
+  run:
+    - numpy
+    - python
+
+tests:
+  - python:
+      imports:
+        - xatlas
+  - script:
+      - pip check
+      - python run_test.py
+    files:
+      recipe:
+        - run_test.py
+    requirements:
+      run:
+        - pip
+        - python
+
+about:
+  homepage: https://github.com/mworchel/xatlas-python
+  repository: https://github.com/mworchel/xatlas-python
+  summary: Python bindings for xatlas
+  license: MIT
+  license_file: LICENSE
+
+extra:
+  recipe-maintainers:
+    - jeongseok-meta
